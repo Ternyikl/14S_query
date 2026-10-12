@@ -1,4 +1,4 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Query, Render } from '@nestjs/common';
 import { AppService } from './app.service.js';
 
 @Controller()
@@ -7,9 +7,15 @@ export class AppController {
 
   @Get()
   @Render('index')
-  getHello() {
+  getHello(
+    @Query('title') title: string = 'Valami',
+    @Query('bgcolor') bgcolor: string = 'white') {
+    
+    //if(!title) {  title = 'Valami' }
+
     return {
-      title: 'My First NestJS App'
+      title: title, //|| 'Valami'
+      bgcolor: bgcolor
     }
   }
 }
